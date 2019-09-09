@@ -1,7 +1,6 @@
 package keyboard
 
 import (
-	"log"
 	"os"
 
 	"gobot.io/x/gobot"
@@ -35,21 +34,21 @@ func NewDriver() *Driver {
 			return
 		},
 		listen: func(k *Driver) {
-			ctrlc := bytes{3}
+			//ctrlc := bytes{3}
 
 			for {
 				var keybuf bytes
 				k.stdin.Read(keybuf[0:3])
 
-				if keybuf == ctrlc {
-					proc, err := os.FindProcess(os.Getpid())
-					if err != nil {
-						log.Fatal(err)
-					}
-
-					proc.Signal(os.Interrupt)
-					break
-				}
+				//if keybuf == ctrlc {
+				//	proc, err := os.FindProcess(os.Getpid())
+				//	if err != nil {
+				//		log.Fatal(err)
+				//	}
+				//
+				//	proc.Signal(os.Interrupt)
+				//	break
+				//}
 
 				k.Publish(Key, Parse(keybuf))
 

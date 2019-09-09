@@ -45,8 +45,14 @@ const (
 )
 
 const (
-	Escape   = 27
-	Spacebar = 32
+	Escape         = 27
+	Spacebar       = 32
+	Interrupt      = 3
+	EndOfFile      = 4  // ^D
+	Suspend        = 26 // ^Z
+	Quit           = 28 // ^\
+	CarriageReturn = 10
+	NewLine        = 13
 )
 
 const (
@@ -89,6 +95,23 @@ func Parse(input bytes) KeyEvent {
 		// vanilla escape
 		if code == Escape {
 			event.Key = Escape
+		}
+
+		// Interrupt
+		if code == Interrupt {
+			event.Key = Interrupt
+		}
+
+		if code == NewLine {
+			event.Key = NewLine
+		}
+
+		if code == CarriageReturn {
+			event.Key = CarriageReturn
+		}
+
+		if code == Suspend {
+			event.Key = Suspend
 		}
 
 		// number keys
